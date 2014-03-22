@@ -1,0 +1,15 @@
+application: taskcalc-proto
+runtime: python27
+api_version: 1
+threadsafe: yes
+version: alpha-005
+
+handlers:
+- url: .*
+  script: main.app
+
+libraries:
+- name: jinja2
+  version: "2.6"
+- name: markupsafe
+  version: "0.15"
