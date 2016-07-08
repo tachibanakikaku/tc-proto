@@ -11,7 +11,7 @@ class AccessLog(ndb.Model):
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Hello Google App Engine World!')
+        self.response.write('Hello Google App Engine (webapp2 + NDB)!')
 
 class DbPage(webapp2.RequestHandler):
     def get(self):
