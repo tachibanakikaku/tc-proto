@@ -1,6 +1,8 @@
+application: taskcalc-proto
 runtime: python27
 api_version: 1
 threadsafe: yes
+version: alpha-005
 
 handlers:
 - url: .*
