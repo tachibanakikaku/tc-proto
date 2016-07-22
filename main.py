@@ -2,9 +2,8 @@ import jinja2
 import os
 import webapp2
 
-from datetime import datetime
+from access_log import AccessLog
 from google.appengine.api import users
-from google.appengine.ext import ndb
 
 env = jinja2.Environment(
     loader = jinja2.FileSystemLoader(
@@ -19,13 +18,6 @@ def login(req):
         url = users.create_login_url(req.uri)
         url_linktext = 'Login'
     return user, url, url_linktext
-
-class AccessLog(ndb.Model):
-    accessed_at = ndb.DateTimeProperty(auto_now_add=True)
-
-    @classmethod
-    def newest(cls):
-        return cls.query().order(-cls.accessed_at).fetch(1)
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
