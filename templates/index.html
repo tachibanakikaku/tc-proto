@@ -1,6 +1,9 @@
-<div class='row'>
-  <p>{{ greeting }} >> {{ user.nickname }}</p>
-  <div class="nav-collapse collapse pull-right">
-    <a href="{{ url|safe }}" class="btn">{{ url_linktext }}</a>
-  </div>
-</div>
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<h2>{{ greeting }} >> {{ user.nickname() }}</h2>
+
+{% endblock %}
