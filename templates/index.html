@@ -1,3 +1,6 @@
 <div class='row'>
-  <p>{{ greeting }} >> {{ user }}</p>
+  <p>{{ greeting }} >> {{ user.nickname }}</p>
+  <div class="nav-collapse collapse pull-right">
+    <a href="{{ url|safe }}" class="btn">{{ url_linktext }}</a>
+  </div>
 </div>

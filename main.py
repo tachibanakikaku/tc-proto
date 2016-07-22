@@ -3,14 +3,22 @@ import os
 import webapp2
 
 from datetime import datetime
+from google.appengine.api import users
 from google.appengine.ext import ndb
 
 env = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(
+    loader = jinja2.FileSystemLoader(
         os.path.dirname('./{}/'.format('templates'))))
 
-def login():
-    return 'user'
+def login(req):
+    user = users.get_current_user()
+    if user:
+        url = users.create_logout_url(req.uri)
+        url_linktext = 'Logout'
+    else:
+        url = users.create_login_url(req.uri)
+        url_linktext = 'Login'
+    return user, url, url_linktext
 
 class AccessLog(ndb.Model):
     accessed_at = ndb.DateTimeProperty(auto_now_add=True)
@@ -21,10 +29,12 @@ class AccessLog(ndb.Model):
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
-        user = login()
+        login_info = login(self.request)
         values = {
-            'user': user,
-            'greeting': 'Hello Google App Engine World!'
+            'user': login_info[0],
+            'greeting': 'Hello Google App Engine World!',
+            'url': login_info[1],
+            'url_linktext': login_info[2]
         }
         template = env.get_template('index.html')
         self.response.write(template.render(values))
