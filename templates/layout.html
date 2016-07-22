@@ -18,6 +18,11 @@
           <a class="navbar-brand" href="#">Brand</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
+          {% if user is not none %}
+          <li>
+            <a href="#">{{ user.nickname() }}</a>
+          </li>
+          {% endif %}
           <li>
             <a href="{{ url|safe }}" class="btn">{{ url_linktext }}</a>
           </li>
